@@ -17,10 +17,6 @@
   <input type="text" class="form-control" id="" name="name" placeholder="">
 </div>
 <div class="mb-3">
-  <label for="" class="form-label">Telefone</label>
-  <input type="text" class="form-control" id="" name="number" placeholder="">
-</div>
-<div class="mb-3">
   <label for="" class="form-label">Email</label>
   <input type="email" class="form-control" id="" name="email" placeholder="name@example.com">
 </div>

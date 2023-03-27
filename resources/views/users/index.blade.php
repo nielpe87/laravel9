@@ -6,6 +6,7 @@
 @extends('app')
 
 @section('content')
+<h1>Usuários</h1>
 <a href="{{ route('users.create') }}" class="btn btn-success">Novo</a>
 <table class="table">
   <thead>
@@ -13,6 +14,7 @@
       <th scope="col">#</th>
       <th scope="col">Nome</th>
       <th scope="col">Email</th>
+      <th scope="col">Fone</th>
       <th scope="col">Opções</th>
       
     </tr>
@@ -23,7 +25,9 @@
   <tr>
       <th scope="row">{{$user->id}}</th>
       <td>{{$user->name}}</td>
+      
       <td>{{$user->email}}</td>
+      <td>{{$user->phone->number}}</td>
       <td>
         <a href="{{ route('users.edit',$user->id) }}" class="btn btn-primary">Editar</a>
         <form action="{{ route('users.destroy', $user->id)}}" method="post">

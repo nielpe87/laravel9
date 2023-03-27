@@ -4,13 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use \App\Models\User;
+use \App\Models\Phone;
 
 class UserController extends Controller
 {
     public function index(){
-        
+    
         $users = User::all();
-        //dd($users);
+      //  dd($users[0]->phone);
         return view('users.index',compact("users"));
     }
 
@@ -31,6 +32,16 @@ class UserController extends Controller
         $user->password = bcrypt($request->password);
 
         $user->save();
+        /*
+        $phone = new Phone;
+        $phone->user_id = $user->id;
+        $phone->number = $request->number;
+        $phone->save();
+        */
+
+        $user->phone()->create([
+            'number' => $request->number
+        ]);
 
         return redirect()->route('users.index');
 
@@ -47,8 +58,8 @@ class UserController extends Controller
         return redirect()->route('users.index');
     }
 
-    public function destroy($id){
-        $user = User::find($id);
+    public function destroy(User $user){
+       
         $user->delete();
 
         return redirect()->route('users.index');

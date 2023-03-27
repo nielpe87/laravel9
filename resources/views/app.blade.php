@@ -19,6 +19,10 @@
             <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="{{ route('users.index') }}">Usuários</a>
             </li>
+            <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{{ route('products.index') }}">Produtos</a>
+            </li>
+
             
         </ul>
         </div>

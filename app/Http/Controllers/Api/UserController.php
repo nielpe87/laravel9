@@ -6,12 +6,13 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use \App\Models\User;
 use \App\Models\Phone;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
     public function index(){
 
-        $users = User::all();
+        $users = User::with("phone")->get();
         return response()->json($users, 200);
 
     }
@@ -61,8 +62,23 @@ class UserController extends Controller
 
     public function destroy(User $user){
 
-        $user->delete();
+        try {
+            
+            DB::beginTransaction();
 
-        return response()->json(['message' => 'usuario excluido'], 200);
+            $user->phone()->delete();
+            $user->delete();
+
+            DB::commit();
+
+            return response()->json(['message' => 'usuario excluido'], 200);
+        } catch (\Throwable $th) {
+
+            DB::rollback();
+
+            return response()->json(['message' => 'erro ao tentar excluir'], 400);
+            //throw $th;
+        }
+        
     }
 }

@@ -14,8 +14,9 @@ class AuthController extends Controller
             'email' => ['required', 'email'],
             'password' => ['required'],
         ],[
-            'required' => "obrigatorio",
-            'email'    => 'email invalido'
+            'email.required' => "obrigatorio",
+            'email.email'   => "email invalido",
+            'password.required'   => 'password obrigatorio',
         ]);
 
         if (Auth::attempt($credentials)) {
